@@ -8,9 +8,56 @@ body {
     width: 100%;
     background-color: #1a1a1a;
     color: white;
-    padding: 5px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
 }
+
+#header a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+    #header-title {
+        max-width: 200px;
+        flex: 1;
+        line-height: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #header-menu {
+        flex: 1;
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+        #header-menu ul {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #header-menu li {
+            display: inline-block;
+            line-height: 50px;
+        }
+
+        #header-menu ul li a {
+            font-size: 13px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+    #header-login {
+        flex: 1;
+        max-width: 200px;
+        text-align: right;
+        font-size: 13px;
+        line-height: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
 #content {
     color: black;

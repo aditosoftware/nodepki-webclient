@@ -1,8 +1,20 @@
 #header
-    span NodePKI Webclient
-    br/
-    if auth && auth.authed === true
-        span Logged in as #{auth.username}. 
-        a(href="/logout") Log out.
-    else
-        span Not logged in.
+    #header-title
+        span NodePKI Webclient
+    #header-menu
+        ul
+            li
+                a(href="/") Home
+            li
+                a(href="/cacerts") CA Certs
+
+            if auth && auth.authed === true
+                li
+                    a(href="/request") Request Certificate
+    #header-login
+        if auth && auth.authed === true
+            span Logged in as #{auth.username}.
+            a(href="/logout") Log out.
+        else
+            span Not logged in.
+            a(href="/") Log in.

@@ -14,9 +14,18 @@ var server          = require('http').createServer(app);
 var controller = {
     index: require('./controllers/index.js'),
     logout: require('./controllers/logout.js'),
-    cacerts: require('./controllers/cacerts.js')
+    cacerts: require('./controllers/cacerts.js'),
+    request: require('./controllers/request.js')
 }
 
+
+global.config = {
+    apipath: '/api/v1',
+    server: {
+        hostname: 'ca.adito.local',
+        port: 443
+    }
+}
 
 
 app.set('views', __dirname + '/views')
@@ -51,6 +60,28 @@ app.get('/logout', function(req, res) {
 
 
 app.get('/cacerts', function(req, res) {
-    page = controller.cacerts(req, res)
-    res.render('cacerts', page)
+    controller.cacerts(req, res).then(function(page){
+        res.render('cacerts', page)
+    })
+    .catch(function(err) {
+        log("Error while processing /cacerts: ", err)
+    })
+});
+
+
+app.get('/request', function(req, res) {
+    controller.request(req, res).then(function(page){
+        res.render('request', page)
+    })
+    .catch(function(err) {
+        log("Error while processing /request: ", err)
+    })
+});
+app.post('/request', function(req, res) {
+    controller.request(req, res).then(function(page){
+        res.render('request', page)
+    })
+    .catch(function(err) {
+        log("Error while processing /request: ", err)
+    })
 });

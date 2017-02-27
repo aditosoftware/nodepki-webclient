@@ -1,0 +1,54 @@
+doctype html
+html(lang="en")
+    include ./partials/head.pug
+
+    body
+        include ./partials/header.pug
+
+        #content
+            h1 Request a new certificate
+
+            if content.state && content.state === 'submitted'
+                p Your certificate was issued. Congrats!
+
+                h2 Certificate key
+
+                pre
+                    | #{content.key}
+
+                h2 Certificate
+
+                pre
+                    | #{content.cert}
+
+                h2 Intermediate Certificate
+
+                pre
+                    | #{content.intermediatecert}
+
+                p
+                    a(href="/request") Request another certificate
+
+            else
+                p.subtitle Create a new certificate and certificate key
+
+                form(action="" method="post")
+                    p
+                        input(type="password" name="key_passphrase")
+
+                    p
+                        input(type="text" name="certificate_country" placeholder="Two-letter country code" maxlength="2")
+                        br
+                        input(type="text" name="certificate_state", placeholder="State, e.g. Bavaria")
+                        br
+                        input(type="text" name="certificate_locality", placeholder="Locality, e.g. Geisenhausen")
+                        br
+                        input(type="text" name="certificate_organization" placeholder="Organization, e.g. ADITO Software GmbH")
+                        br
+                        input(type="text" name="certificate_cname", placeholder="CommonName e.g. test.adito.local")
+
+                    p
+                        input(type="hidden" name="submitted" value="submitted")
+                        input(type="submit" value="Request certificate")
+
+        include ./partials/foot.pug
