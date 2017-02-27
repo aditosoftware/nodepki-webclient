@@ -6,6 +6,12 @@ html(lang="en")
         include ./partials/header.pug
 
         #content
+            if (login)
+                if(content.loginsuccess)
+                    p.banner.success Login successful
+                else
+                    p.banner.fail Login failed.
+
             if (auth && auth.authed)
                 p You are logged in. Want to log out?
                 a(href="/logout") Log out

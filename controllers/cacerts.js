@@ -17,11 +17,11 @@ module.exports = function(req, res) {
          * Load certificates via API request
          */
 
-        apiclient.request(global.config.apipath + '/ca/cert/get/', 'POST', { data: { ca: 'root' } } ).then(function(response) {
+        apiclient.request(global.apipath + '/ca/cert/get/', 'POST', { data: { ca: 'root' } } ).then(function(response) {
             if(response.cert)
                 page.content.rootcert = response.cert
 
-            apiclient.request(global.config.apipath + '/ca/cert/get/', 'POST', { data: { ca: 'intermediate' } } ).then(function(response) {
+            apiclient.request(global.apipath + '/ca/cert/get/', 'POST', { data: { ca: 'intermediate' } } ).then(function(response) {
                 if(response.cert)
                     page.content.intermediatecert = response.cert
 

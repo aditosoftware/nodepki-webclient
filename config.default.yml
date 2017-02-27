@@ -1,0 +1,4 @@
+server:
+    hostname: ca.adito.dev
+    port: 8080
+    tls: false

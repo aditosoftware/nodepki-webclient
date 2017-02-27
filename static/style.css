@@ -66,6 +66,22 @@ body {
     min-height: calc(100vh - 70px - 10px);
 }
 
+
+p.banner {
+    padding: 15px;
+    border-radius: 3px;
+}
+
+p.banner.fail {
+    border: solid 1px red;
+    background-color: #ffdada;
+}
+
+p.banner.success {
+    border: solid 1px green;
+    background-color: #d7ffca;
+}
+
 #footer {
     color: white;
     background-color: #1a1a1a;

@@ -89,13 +89,13 @@ module.exports = function(req, res) {
                              * Load certificates via API request
                              */
 
-                            apiclient.request(global.config.apipath + '/certificate/request/', 'POST', pushdata ).then(function(response) {
+                            apiclient.request(global.apipath + '/certificate/request/', 'POST', pushdata ).then(function(response) {
                                 if(response.success && response.cert) {
                                     log("Cert created successfully.")
 
                                     page.content.cert = response.cert
 
-                                    apiclient.request(global.config.apipath + '/ca/cert/get/', 'POST', { data: { ca: 'intermediate' } } ).then(function(response) {
+                                    apiclient.request(global.apipath + '/ca/cert/get/', 'POST', { data: { ca: 'intermediate' } } ).then(function(response) {
                                         if(response.success && response.cert) {
                                             page.content.intermediatecert = response.cert
 

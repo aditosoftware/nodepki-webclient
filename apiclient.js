@@ -5,6 +5,7 @@
 var rootcheck   = require('./rootcheck.js')
 var log         = require('fancy-log')
 var https       = require('https')
+var http        = require('http')
 var fs          = require('fs-extra')
 
 var exports = {}
@@ -43,24 +44,37 @@ exports.request = function(path, method, pushdata) {
         };
 
         new Promise(function(resolve, reject) {
-            rootcheck.checkCert().then(function(){
-                var rootcert = fs.readFileSync('data/root.cert.pem');
+            if(global.config.server.tls) {
+                rootcheck.checkCert().then(function(){
+                    var rootcert = fs.readFileSync('data/root.cert.pem');
 
-                var req = https.request({
+                    var req = https.request({
+                        host: global.config.server.hostname,
+                        port: global.config.server.port,
+                        path: path,
+                        method: method,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        ca: rootcert
+                    }, httpresponse);
+                    resolve(req);
+                })
+                .catch(function(err) {
+                    reject("Could not check root cert: " + err);
+                });
+            } else {
+                var req = http.request({
                     host: global.config.server.hostname,
                     port: global.config.server.port,
                     path: path,
                     method: method,
                     headers: {
                         'Content-Type': 'application/json'
-                    },
-                    ca: rootcert
+                    }
                 }, httpresponse);
                 resolve(req);
-            })
-            .catch(function(err) {
-                reject("Could not check root cert: " + err);
-            });
+            }
         }).then(function(req){
             req.on('error', function(error) {
                 reject(error);
