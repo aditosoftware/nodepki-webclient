@@ -35,7 +35,7 @@ exports.request = function(path, method, pushdata) {
 
                         reject("One or more API errors");
                     } else {
-                        resolve(response);
+                        reject(response);
                     }
                 } else {
                     resolve(response);

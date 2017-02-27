@@ -2,3 +2,9 @@ server:
     hostname: ca.adito.dev
     port: 8080
     tls: false
+
+csr_defaults:
+    country: DE
+    state: Bavaria
+    locality: Geisenhausen
+    organization: ADITO Software GmbH

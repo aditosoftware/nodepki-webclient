@@ -50,7 +50,7 @@ if(fs.existsSync('data/config/config.yml')) {
 app.set('views', __dirname + '/views')
 app.set('view engine', 'pug')
 app.use(express.static(__dirname + '/public'))
-app.use(session({ secret: 'comebskfjevskn4inc8h3k', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false}))
+app.use(session({ secret: 'comebskfjevskn4inc8h3k', cookie: { maxAge: 3600000 }, resave: false, saveUninitialized: false})) // Session lifetime: 1h
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use('/static', express.static('static'));
 
@@ -90,7 +90,7 @@ app.get('/logout', function(req, res) {
 
 app.get('/cacerts', function(req, res) {
     controller.cacerts(req, res).then(function(page){
-        res.render('cacerts', page)
+        //
     })
     .catch(function(err) {
         log("Error while processing /cacerts: ", err)
@@ -100,7 +100,7 @@ app.get('/cacerts', function(req, res) {
 
 app.get('/request', function(req, res) {
     controller.request(req, res).then(function(page){
-        res.render('request', page)
+        //
     })
     .catch(function(err) {
         log("Error while processing /request: ", err)
@@ -108,7 +108,7 @@ app.get('/request', function(req, res) {
 });
 app.post('/request', function(req, res) {
     controller.request(req, res).then(function(page){
-        res.render('request', page)
+        //
     })
     .catch(function(err) {
         log("Error while processing /request: ", err)

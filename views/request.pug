@@ -6,46 +6,77 @@ html(lang="en")
         include ./partials/header.pug
 
         #content
-            h1 Request a new certificate
+            h1 #{title}
 
             if content.state && content.state === 'submitted'
-                p Your certificate was issued. Congrats!
+                if success
+                    p Your certificate was issued. Congrats!
 
-                h2 Certificate key
+                    h2 Certificate key
 
-                pre
-                    | #{content.key}
+                    pre
+                        | #{content.key}
 
-                h2 Certificate
+                    h2 Certificate
 
-                pre
-                    | #{content.cert}
+                    pre
+                        | #{content.cert}
 
-                h2 Intermediate Certificate
+                    h2 Intermediate Certificate
 
-                pre
-                    | #{content.intermediatecert}
+                    pre
+                        | #{content.intermediatecert}
 
-                p
-                    a(href="/request") Request another certificate
+                    p
+                        a(href="/request") Request another certificate
+                else
+                    p.banner.fail
+                        | Action failed. :(
+                        | #{errormessage}
 
             else
                 p.subtitle Create a new certificate and certificate key
 
                 form(action="" method="post")
-                    p
-                        input(type="password" name="key_passphrase")
+                    table
+                        tr
+                            th Attribute
+                            th Value
+                        tr
+                            td Certificate key passphase (optional)
+                            td
+                                input(type="password" name="key_passphrase")
+                        tr
+                            td Certificate type
+                            td
+                                select(name="certificate_type")
+                                    option(value="server") Server certificate (Webserver, ...)
+                                    option(value="client") Client certificate (OpenVPN Client, ... )
+                        tr
+                            td Two-letter country code
+                            td
+                                input(type="text" name="certificate_country" maxlength="2" value=csr_defaults.country)
+                        tr
+                            td State
+                            td
+                                input(type="text" name="certificate_state" value=csr_defaults.state maxlength="64")
+                        tr
+                            td Locality
+                            td
+                                input(type="text" name="certificate_locality" value=csr_defaults.locality maxlength="64")
+                        tr
+                            td Organization
+                            td
+                                input(type="text" name="certificate_organization" value=csr_defaults.organization maxlength="64")
+                        tr
+                            td CommonName
+                            td
+                                input(type="text" name="certificate_cname" maxlength="64")
 
-                    p
-                        input(type="text" name="certificate_country" placeholder="Two-letter country code" maxlength="2")
-                        br
-                        input(type="text" name="certificate_state", placeholder="State, e.g. Bavaria")
-                        br
-                        input(type="text" name="certificate_locality", placeholder="Locality, e.g. Geisenhausen")
-                        br
-                        input(type="text" name="certificate_organization" placeholder="Organization, e.g. ADITO Software GmbH")
-                        br
-                        input(type="text" name="certificate_cname", placeholder="CommonName e.g. test.adito.local")
+                        tr
+                            td Lifetime (in days)
+                            td
+                                input(type="number" name="certificate_lifetime" value="365")
 
                     p
                         input(type="hidden" name="submitted" value="submitted")
