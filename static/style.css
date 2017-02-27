@@ -1,0 +1,30 @@
+body {
+    font-family: Arial;
+    margin: 0px;
+}
+
+#header {
+    height: 50px;
+    width: 100%;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#content {
+    color: black;
+    padding: 15px;
+    box-sizing: border-box;
+    min-height: calc(100vh - 70px - 10px);
+}
+
+#footer {
+    color: white;
+    background-color: #1a1a1a;
+    padding: 5px;
+    text-align: center;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+}

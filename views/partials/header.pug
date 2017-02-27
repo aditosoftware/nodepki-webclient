@@ -1,0 +1,8 @@
+#header
+    span NodePKI Webclient
+    br/
+    if auth && auth.authed === true
+        span Logged in as #{auth.username}. 
+        a(href="/logout") Log out.
+    else
+        span Not logged in.

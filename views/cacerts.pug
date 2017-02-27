@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    include ./partials/head.pug
+
+    body
+        include ./partials/header.pug
+
+        #content
+            p Download root.cert.pem and intermediate.cert.pem here.
+
+            h2 Root CA certificate
+            pre #{content.rootcert}
+
+            h2 Intermediate CA certificate
+            pre #{content.intermediatecert}
+
+        include ./partials/foot.pug

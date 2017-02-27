@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    include ./partials/head.pug
+
+    body
+        include ./partials/header.pug
+
+        #content
+            if (auth && auth.authed)
+                p You are logged in. Want to log out?
+                a(href="/logout") Log out
+            else
+                p
+                    a(href="/cacerts") Download root certificate and intermediate certificate
+                include ./partials/login.pug
+
+        include ./partials/foot.pug
