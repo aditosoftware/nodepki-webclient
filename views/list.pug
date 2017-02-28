@@ -8,6 +8,15 @@ html(lang="en")
         #content
             h1 #{title}
 
+            p
+                a.normal(href="/list?state=all") All
+                | &nbsp; &nbsp; &nbsp;
+                a.normal(href="/list?state=valid") Valid
+                | &nbsp; &nbsp; &nbsp;
+                a.normal(href="/list?state=revoked") Revoked
+                | &nbsp; &nbsp; &nbsp;
+                a.normal(href="/list?state=expired") Expired
+
             table
                 tr(style="text-align:left;")
                     th Serial / Download

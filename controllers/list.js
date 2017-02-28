@@ -21,9 +21,11 @@ module.exports = function(req, res) {
              * Load certificates via API request
              */
 
+            var state = (req.param('state') ? req.param('state') : 'all')
+
             var pushdata = {
                 data: {
-                    state: 'all'
+                    state: state
                 },
                 auth: {
                     username: req.session.auth.username,

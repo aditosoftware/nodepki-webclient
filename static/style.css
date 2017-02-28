@@ -115,6 +115,10 @@ body pre {
     content: "➤ ";
 }
 
+#content a.normal:before {
+    content:''
+}
+
 
 p.banner {
     padding: 15px;
