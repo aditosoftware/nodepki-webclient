@@ -61,25 +61,13 @@ server.listen(5000, function () {
 });
 
 
-
 app.get('/', function(req, res) {
-    controller.index(req, res).then(function(page) {
-        //
-    })
-    .catch(function(err) {
-        log("Error while processing /index: " + err)
-    });
+    controller.index(req, res);
 });
 
 
 app.post('/', function(req, res) {
-    controller.index(req, res).then(function(page) {
-        //
-    })
-    .catch(function(err) {
-        log("Error while processing /index: " + err)
-    });
-
+    controller.index(req, res);
 });
 
 
@@ -90,47 +78,38 @@ app.get('/logout', function(req, res) {
 
 
 app.get('/cacerts', function(req, res) {
-    controller.cacerts(req, res).then(function(page){
-        //
-    })
-    .catch(function(err) {
-        log("Error while processing /cacerts: ", err)
-    })
+    controller.cacerts(req, res)
 });
 
 
 app.get('/request', function(req, res) {
-    controller.request(req, res).then(function(page){
-        //
-    })
-    .catch(function(err) {
-        log("Error while processing /request: ", err)
-    })
+    if(req.session.auth && req.session.auth.authed) {
+        controller.request(req, res);
+    } else {
+        res.redirect(302, '/?reqlogin=1');
+    }
 });
 app.post('/request', function(req, res) {
-    controller.request(req, res).then(function(page){
-        //
-    })
-    .catch(function(err) {
-        log("Error while processing /request: ", err)
-    })
+    if(req.session.auth && req.session.auth.authed) {
+        controller.request(req, res);
+    } else {
+        res.redirect(302, '/?reqlogin=1');
+    }
 });
 
 
 app.get('/list', function(req, res) {
-    controller.list(req, res).then(function(page){
-        //
-    })
-    .catch(function(err) {
-        log("Error while processing /list: ", err)
-    })
+    if(req.session.auth && req.session.auth.authed) {
+        controller.list(req, res);
+    } else {
+        res.redirect(302, '/?reqlogin=1');
+    }
 });
 
 app.get('/getcert', function(req, res) {
-    controller.getcert(req, res).then(function(page){
-        //
-    })
-    .catch(function(err) {
-        log("Error while processing /getcert: ", err)
-    })
+    if(req.session.auth && req.session.auth.authed) {
+        controller.getcert(req, res);
+    } else {
+        res.redirect(302, '/?reqlogin=1');
+    }
 });

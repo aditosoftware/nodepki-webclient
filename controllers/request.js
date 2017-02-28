@@ -6,25 +6,24 @@ var fs          = require('fs-extra');
 
 
 module.exports = function(req, res) {
-    // Check auth state
-    if(!req.session.auth || !req.session.auth.authed) {
-        res.redirect(302, '/');
-    }
-
-    var page = {
-        title: 'Request new certificate',
-        content: {
-            state: 'form'
-        },
-        auth: req.session.auth
-    }
-
-    // Create temporary dir
-    var tempdir = 'tmp/' + uuidV4() + '/';
-    fs.ensureDirSync(tempdir);
-
     // Wrapper Promise
     return new Promise(function(resolve, reject) {
+        // Check auth state
+
+
+        var page = {
+            title: 'Request new certificate',
+            content: {
+                state: 'form'
+            },
+            auth: req.session.auth
+        }
+
+        // Create temporary dir
+        var tempdir = 'tmp/' + uuidV4() + '/';
+        fs.ensureDirSync(tempdir);
+
+
         new Promise(function(resolve, reject) {
             if(req.body.submitted && req.body.submitted === 'submitted' && req.session.auth.authed) {
                 page.content.state = 'submitted'

@@ -22,24 +22,28 @@ module.exports = function(req, res) {
 
             // If user tries to lo in
             if(req.body.username && req.body.password) {
-                // Check credentials
-
                 apiclient.request(global.apipath + '/auth/check/', 'POST', { auth: { username: req.body.username, password: req.body.password } } ).then(function(response) {
                     page.login = true
-                    page.success = response.success;
 
-                    if(response.success) {
+                    if(response.data.valid === true) {
+                        page.success = true
                         sess.auth.authed = true
                         sess.auth.username = req.body.username
                         sess.auth.password = req.body.password
+                    } else {
+                        page.errormessage = "Login credentials invalid."
                     }
 
                     resolve(page)
                 })
                 .catch(function(err) {
-                    reject("API request failed: ", err)
+                    reject("API request failed.")
                 });
             } else {
+                if(req.param('reqlogin') == '1'){
+                    page.reqlogin = true
+                }
+
                 resolve(page)
             }
         })

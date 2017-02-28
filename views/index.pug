@@ -19,8 +19,10 @@ html(lang="en")
                         li Download the root and intermediate certificate
                         li Create new certificates
                         li List issued certificates
-                        li Download issued certificates  
+                        li Download issued certificates
             else
+                if reqlogin
+                    p.banner.fail You have to log in to continue
                 include ./partials/login.pug
 
         include ./partials/foot.pug
