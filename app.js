@@ -17,7 +17,9 @@ var controller = {
     index: require('./controllers/index.js'),
     logout: require('./controllers/logout.js'),
     cacerts: require('./controllers/cacerts.js'),
-    request: require('./controllers/request.js')
+    request: require('./controllers/request.js'),
+    list: require('./controllers/list.js'),
+    getcert: require('./controllers/getcert.js')
 }
 
 
@@ -72,7 +74,7 @@ app.get('/', function(req, res) {
 
 app.post('/', function(req, res) {
     controller.index(req, res).then(function(page) {
-        // 
+        //
     })
     .catch(function(err) {
         log("Error while processing /index: " + err)
@@ -111,5 +113,24 @@ app.post('/request', function(req, res) {
     })
     .catch(function(err) {
         log("Error while processing /request: ", err)
+    })
+});
+
+
+app.get('/list', function(req, res) {
+    controller.list(req, res).then(function(page){
+        //
+    })
+    .catch(function(err) {
+        log("Error while processing /list: ", err)
+    })
+});
+
+app.get('/getcert', function(req, res) {
+    controller.getcert(req, res).then(function(page){
+        //
+    })
+    .catch(function(err) {
+        log("Error while processing /getcert: ", err)
     })
 });

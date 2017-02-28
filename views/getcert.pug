@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    include ./partials/head.pug
+
+    body
+        include ./partials/header.pug
+
+        #content
+            h1 #{title}
+
+            if success === false
+                p.banner.fail #{errormessage}
+            else
+                p You should never see this text.
+
+
+        include ./partials/foot.pug

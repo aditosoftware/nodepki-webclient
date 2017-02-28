@@ -5,11 +5,6 @@ const uuidV4    = require('uuid/v4');
 var fs          = require('fs-extra');
 
 
-function fail() {
-
-}
-
-
 module.exports = function(req, res) {
     // Check auth state
     if(!req.session.auth || !req.session.auth.authed) {

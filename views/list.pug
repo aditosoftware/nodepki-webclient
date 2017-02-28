@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    include ./partials/head.pug
+
+    body
+        include ./partials/header.pug
+
+        #content
+            h1 #{title}
+
+            table
+                tr(style="text-align:left;")
+                    th Serial / Download
+                    th Expiration date
+                    th Revocation date
+                    th Subject
+
+                each cert in content.certs
+                    tr
+                        td
+                            a(href=cert.download) #{cert.serial}
+                        td #{cert.expirationtime}
+                        td #{cert.revocationtime}
+                        td #{cert.subject}
+
+
+        include ./partials/foot.pug
