@@ -16,9 +16,7 @@ module.exports = function(req, res) {
             // Make sure there is an auth object in the session
 
             if(!sess.auth)
-                sess.auth = {
-                    authed: false
-                }
+                sess.auth = { authed: false }
 
             // If user tries to lo in
             if(req.body.username && req.body.password) {
@@ -43,7 +41,6 @@ module.exports = function(req, res) {
                 if(req.param('reqlogin') == '1'){
                     page.reqlogin = true
                 }
-
                 resolve(page)
             }
         })

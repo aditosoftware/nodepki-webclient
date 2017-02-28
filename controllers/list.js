@@ -11,7 +11,11 @@ module.exports = function(req, res) {
     var page = {
         title: 'List of issued certificates',
         content: {},
-        auth: req.session.auth
+        auth: req.session.auth,
+        javascripts: [
+            '/static/js/tablesort/tablesort.js',
+            '/static/js/tablesort/sorts/tablesort.date.js'
+        ]
     }
 
     // Wrapper Promise
@@ -40,8 +44,8 @@ module.exports = function(req, res) {
                     page.content.certs = []
 
                     response.certs.forEach(function(cert) {
-                        var expirationtime = (cert.expirationtime.slice(4,6)) + '.' + (cert.expirationtime.slice(2,4)) + '.' + '20' + (cert.expirationtime.slice(0,2))
-                        var revocationtime = (cert.revocationtime !== '') ? (cert.expirationtime.slice(4,6)) + '.' + (cert.expirationtime.slice(2,4)) + '.' + '20' + (cert.expirationtime.slice(0,2)) : ''
+                        var expirationtime = '20' + (cert.expirationtime.slice(0,2)) + '-' + (cert.expirationtime.slice(2,4)) + '-' + (cert.expirationtime.slice(4,6))
+                        var revocationtime = (cert.revocationtime !== '') ? '20' + (cert.revocationtime.slice(0,2)) + '-' + (cert.revocationtime.slice(2,4)) + '-' + (cert.revocationtime.slice(4,6)) : ''
 
                         var cert = {
                             serial: cert.serial,

@@ -17,12 +17,15 @@ html(lang="en")
                 | &nbsp; &nbsp; &nbsp;
                 a.normal(href="/list?state=expired") Expired
 
-            table
-                tr(style="text-align:left;")
-                    th Serial / Download
-                    th Expiration date
-                    th Revocation date
-                    th Subject
+            p Click on the column headers to sort.
+
+            table#listtable
+                thead
+                    tr(style="text-align:left;")
+                        th Serial / Download
+                        th(data-sort-method="date" data-sort-default) Expiration date
+                        th(data-sort-method="date") Revocation date
+                        th Subject
 
                 each cert in content.certs
                     tr
@@ -31,6 +34,9 @@ html(lang="en")
                         td #{cert.expirationtime}
                         td #{cert.revocationtime}
                         td #{cert.subject}
+
+        script.
+            new Tablesort(document.getElementById('listtable'));
 
 
         include ./partials/foot.pug
