@@ -13,10 +13,14 @@ html(lang="en")
                     p.banner.fail #{errormessage}
 
             if (auth && auth.authed)
-                p Select an action from above
-            else
                 p
-                    a(href="/cacerts") Download root certificate and intermediate certificate
+                    | With NodePKI-Webclient you can:
+                    ul
+                        li Download the root and intermediate certificate
+                        li Create new certificates
+                        li List issued certificates
+                        li Download issued certificates  
+            else
                 include ./partials/login.pug
 
         include ./partials/foot.pug

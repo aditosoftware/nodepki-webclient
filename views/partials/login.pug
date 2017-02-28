@@ -1,9 +1,12 @@
-p Please log in:
 
-form(method="post" action="/")
-    input(type="text" name="username" placeholder="Username")
-    br/
-    input(type="password" name="password" placeholder="Password")
+#loginwrapper
+    .logincontainer
+        form(method="post" action="/")
+            input(type="text" name="username" placeholder="Username")
+            br/
+            input(type="password" name="password" placeholder="Password")
 
-    p
-        input(type="submit" value="Log in")
+            p
+                input(type="submit" value="Log in")
+    .logincontainer.note
+        p Use your NodePKI server login credentials to log in.
