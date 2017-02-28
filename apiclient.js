@@ -43,12 +43,14 @@ exports.request = function(path, method, pushdata) {
             });
         };
 
+        var req;
+
         new Promise(function(resolve, reject) {
             if(global.config.server.tls) {
                 rootcheck.checkCert().then(function(){
                     var rootcert = fs.readFileSync('data/root.cert.pem');
 
-                    var req = https.request({
+                    req = https.request({
                         host: global.config.server.hostname,
                         port: global.config.server.port,
                         path: path,
@@ -58,13 +60,13 @@ exports.request = function(path, method, pushdata) {
                         },
                         ca: rootcert
                     }, httpresponse);
-                    resolve(req);
+                    resolve();
                 })
                 .catch(function(err) {
                     reject("Could not check root cert: " + err);
                 });
             } else {
-                var req = http.request({
+                req = http.request({
                     host: global.config.server.hostname,
                     port: global.config.server.port,
                     path: path,
@@ -73,11 +75,12 @@ exports.request = function(path, method, pushdata) {
                         'Content-Type': 'application/json'
                     }
                 }, httpresponse);
-                resolve(req);
+                resolve();
             }
-        }).then(function(req){
+        })
+        .then(function(){
             req.on('error', function(error) {
-                reject(error);
+                reject(error)
             });
 
             if(method === 'POST') {

@@ -10,7 +10,10 @@ html(lang="en")
 
             if content.state && content.state === 'submitted'
                 if success
-                    p Your certificate was issued. Congrats!
+                    p.banner.success Your certificate has been issued! Congrats! :-)
+
+                    p
+                        a(href="/request") Request another certificate
 
                     h2 Certificate key
 
@@ -27,20 +30,17 @@ html(lang="en")
                     pre
                         | #{content.intermediatecert}
 
-                    p
-                        a(href="/request") Request another certificate
                 else
                     p.banner.fail
-                        | Action failed. :(
                         | #{errormessage}
 
             else
                 p.subtitle Create a new certificate and certificate key
 
                 form(action="" method="post")
-                    table
-                        tr
-                            th Attribute
+                    table(style="width:100%;" border="0")
+                        tr(style="text-align:left;height:50px;")
+                            th(style="min-width: 350px;") Attribute
                             th Value
                         tr
                             td Certificate key passphase (optional)
@@ -78,8 +78,12 @@ html(lang="en")
                             td
                                 input(type="number" name="certificate_lifetime" value="365")
 
-                    p
-                        input(type="hidden" name="submitted" value="submitted")
-                        input(type="submit" value="Request certificate")
+                        tr
+                            td
+                                input(type="hidden" name="submitted" value="submitted")
+                            td
+                                input(type="submit" value="Request certificate")
+
+
 
         include ./partials/foot.pug

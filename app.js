@@ -62,21 +62,20 @@ server.listen(5000, function () {
 
 app.get('/', function(req, res) {
     controller.index(req, res).then(function(page) {
-        res.render('index', page)
+        //
     })
     .catch(function(err) {
-        log("Error while processing /index")
+        log("Error while processing /index: " + err)
     });
-
 });
 
 
 app.post('/', function(req, res) {
     controller.index(req, res).then(function(page) {
-        res.render('index', page)
+        // 
     })
     .catch(function(err) {
-        log("Error while processing /index")
+        log("Error while processing /index: " + err)
     });
 
 });

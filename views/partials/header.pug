@@ -13,7 +13,7 @@
                     a(href="/request") Request Certificate
     #header-login
         if auth && auth.authed === true
-            span Logged in as #{auth.username}.
+            | Logged in as #{auth.username}.&nbsp;
             a(href="/logout") Log out.
         else
             span Not logged in.

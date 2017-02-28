@@ -29,14 +29,18 @@ module.exports = function(req, res) {
                     resolve(page)
                 })
                 .catch(function(err) {
-                    reject("Error while making API call: ", err)
+                    reject("Could not request intermediate certificate.", err)
                 });
             })
             .catch(function(err) {
-                reject("Error while making API call: ", err)
+                reject("Could not request root certificate. ", err)
             });
         })
         .then(function(page) {
+            var publicpath = (global.config.server.tls ? 'https://' : 'http://') + global.config.server.hostname + ':' + global.config.server.port + '/public/'
+            page.rootdownload = publicpath + 'root.cert.pem'
+            page.intermediatedownload = publicpath + 'intermediate.cert.pem'
+
             page.success = true
             res.render('cacerts', page)
             resolve()

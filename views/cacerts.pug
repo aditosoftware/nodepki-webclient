@@ -7,7 +7,15 @@ html(lang="en")
 
         #content
             if success
-                p Download root.cert.pem and intermediate.cert.pem here.
+                h1 #{title}
+
+                h2 File downloads:
+
+                ul(style="list-style-type:none;")
+                    li
+                        a(href=rootdownload) root.cert.pem
+                    li
+                        a(href=intermediatedownload) intermediate.cert.pem
 
                 h2 Root CA certificate
                 pre #{content.rootcert}

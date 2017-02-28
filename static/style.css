@@ -1,6 +1,11 @@
 body {
     font-family: Arial;
     margin: 0px;
+    font-size: 0.95rem;
+}
+
+body pre {
+    font-size: 0.75rem;
 }
 
 #header {
@@ -11,6 +16,7 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 #header a {
@@ -19,18 +25,20 @@ body {
 }
 
     #header-title {
-        max-width: 200px;
-        flex: 1;
+        flex-grow: 1;
         line-height: 50px;
         padding-left: 10px;
         padding-right: 10px;
+        box-sizing: border-box;
     }
 
     #header-menu {
-        flex: 1;
-        text-align: center;
-        padding-left: 10px;
-        padding-right: 10px;
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 970px;
     }
 
         #header-menu ul {
@@ -49,14 +57,18 @@ body {
             padding-right: 20px;
         }
 
+        #header-menu ul li a:first-child {
+            padding-left: 10px;
+        }
+
     #header-login {
-        flex: 1;
-        max-width: 200px;
+        flex-grow: 1;
         text-align: right;
         font-size: 13px;
         line-height: 50px;
         padding-left: 10px;
         padding-right: 10px;
+        box-sizing: border-box;
     }
 
 #content {
@@ -64,23 +76,68 @@ body {
     padding: 15px;
     box-sizing: border-box;
     min-height: calc(100vh - 70px - 10px);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+}
+
+
+#content a {
+    color: #0054ff;
+    text-decoration: none;
+}
+#content a:hover {
+    text-decoration: underline;
+}
+#content a:before {
+    content: "➤ ";
 }
 
 
 p.banner {
     padding: 15px;
-    border-radius: 3px;
+    font-size: 0.8rem;
 }
 
 p.banner.fail {
-    border: solid 1px red;
-    background-color: #ffdada;
+    border-left: solid 10px #cf0000;
+    background-color: #ffb3b3;
 }
 
 p.banner.success {
-    border: solid 1px green;
-    background-color: #d7ffca;
+    border-left: solid 10px #00cf00;
+    background-color: #c5ffb3;
 }
+
+
+
+/*
+ * Form elements
+ */
+
+#content input, #content select {
+    background: none;
+    border: solid 1px #dadada;
+    height: 1.8rem;
+    padding: 3px 7px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 2px;
+}
+
+
+#content input[type="submit"] {
+    background-color: #4185fc;
+    color: white;
+    border: none;
+    margin-top: 20px;
+}
+#content input[type="submit"]:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 3px #cfcfcf;
+}
+
 
 #footer {
     color: white;

@@ -24,6 +24,10 @@ module.exports = function(req, res) {
         auth: req.session.auth
     }
 
+    // Create temporary dir
+    var tempdir = 'tmp/' + uuidV4() + '/';
+    fs.ensureDirSync(tempdir);
+
     // Wrapper Promise
     return new Promise(function(resolve, reject) {
         new Promise(function(resolve, reject) {
@@ -32,7 +36,6 @@ module.exports = function(req, res) {
 
                 // Quick! Create key, CSR and submit to server.
                 // Then receive result, and display!
-                // Things are getting messy now. :-/
 
                 // Gather data ...
                 var requestdata;
@@ -52,17 +55,12 @@ module.exports = function(req, res) {
                         }
                     }
                 } catch(err) {
-                    reject("Not sufficient data transmitted! Error: " + err)
+                    reject("Not enough data transmitted! Error: " + err)
                 }
 
 
                 console.log("Gathered data:")
                 console.log(requestdata)
-
-
-                // Create temporary dir
-                var tempdir = 'tmp/' + uuidV4() + '/';
-                fs.ensureDirSync(tempdir);
 
                 // Create certificate key
                 passparam = (requestdata.key.passphrase === '') ? '' : '-aes256 -passout pass:' + requestdata.key.passphrase;
@@ -70,7 +68,7 @@ module.exports = function(req, res) {
                     cwd: tempdir
                 }, function(error, stdout, stderr) {
                     if(!error) {
-                        // Save the key in var
+                        // Save the key in variable
                         page.content.key = fs.readFileSync(tempdir + 'key.pem')
 
                         // Create csr.
@@ -105,40 +103,35 @@ module.exports = function(req, res) {
 
                                 apiclient.request(global.apipath + '/certificate/request/', 'POST', pushdata ).then(function(response) {
                                     if(response.success && response.cert) {
+                                        // Cert received from NodePKI server
                                         log("Cert created successfully.")
 
                                         page.content.cert = response.cert
 
+                                        // Request intermediate certificate ... we'll display it as well
                                         apiclient.request(global.apipath + '/ca/cert/get/', 'POST', { data: { ca: 'intermediate' } } ).then(function(response) {
                                             if(response.success && response.cert) {
                                                 page.content.intermediatecert = response.cert
-
-                                                fs.removeSync(tempdir)
                                                 resolve(page)
                                             } else {
                                                 reject("Error while retrieving intermediate cert.")
                                             }
                                         })
                                         .catch(function(err) {
-                                            fs.removeSync(tempdir);
                                             reject("Error while making API call: ", err)
                                         });
                                     } else {
-                                        fs.removeSync(tempdir);
                                         reject("Failed to get certificate.")
                                     }
                                 })
                                 .catch(function(err) {
-                                    fs.removeSync(tempdir);
                                     reject("Error while making API call: ", err)
                                 });
                             } else {
-                                fs.removeSync(tempdir);
                                 reject("Could not create .csr.");
                             }
                         });
                     } else {
-                        fs.removeSync(tempdir);
                         reject("Could not create .csr.");
                     }
                 });
@@ -154,12 +147,14 @@ module.exports = function(req, res) {
         .then(function(page) {
             page.success = true
             res.render('request', page)
+            fs.removeSync(tempdir);
             resolve(page)
         })
         .catch(function(err) {
             page.success = false
             page.errormessage = err
             res.render('request', page)
+            fs.removeSync(tempdir);
             reject(err)
         });
     });

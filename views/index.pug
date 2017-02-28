@@ -7,14 +7,13 @@ html(lang="en")
 
         #content
             if (login)
-                if(content.loginsuccess)
-                    p.banner.success Login successful
+                if(success)
+                    p.banner.success Login successful!
                 else
-                    p.banner.fail Login failed.
+                    p.banner.fail #{errormessage}
 
             if (auth && auth.authed)
-                p You are logged in. Want to log out?
-                a(href="/logout") Log out
+                p Select an action from above
             else
                 p
                     a(href="/cacerts") Download root certificate and intermediate certificate
