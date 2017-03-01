@@ -4,7 +4,8 @@ module.exports = function(req, res) {
     var page = {
         title: "Revoke certificate",
         content: {},
-        auth: req.session.auth
+        auth: req.session.auth,
+        baseurl: global.config.server.baseurl
     }
 
     new Promise(function(resolve, reject) {

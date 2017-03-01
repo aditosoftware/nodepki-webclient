@@ -8,7 +8,8 @@ module.exports = function(req, res) {
             rootcert: "--- FAIL ---",
             intermediatecert: "--- FAIL ---"
         },
-        auth: req.session.auth
+        auth: req.session.auth,
+        baseurl: global.config.server.baseurl
     };
 
     return new Promise(function(resolve, reject) {
@@ -37,7 +38,7 @@ module.exports = function(req, res) {
             });
         })
         .then(function(page) {
-            var publicpath = (global.config.server.tls ? 'https://' : 'http://') + global.config.server.hostname + ':' + global.config.server.port + '/public/'
+            var publicpath = (global.config.apiserver.tls ? 'https://' : 'http://') + global.config.apiserver.hostname + ':' + global.config.apiserver.port + '/public/'
             page.rootdownload = publicpath + 'root.cert.pem'
             page.intermediatedownload = publicpath + 'intermediate.cert.pem'
 

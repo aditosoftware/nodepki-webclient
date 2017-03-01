@@ -8,7 +8,8 @@ module.exports = function(req, res) {
     }
 
     var page = {
-        title: ""
+        title: "",
+        baseurl: global.config.server.baseurl
     }
 
     var serial = req.param('serial')

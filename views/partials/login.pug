@@ -1,7 +1,7 @@
 
 #loginwrapper
     .logincontainer
-        form(method="post" action="/")
+        form(method="post" action=(baseurl + '/'))
             input(type="text" name="username" placeholder="Username" autofocus)
             br/
             input(type="password" name="password" placeholder="Password")

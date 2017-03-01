@@ -13,7 +13,7 @@ html(lang="en")
                     p.banner.success Your certificate has been issued! Congrats! :-)
 
                     p
-                        a(href="/request") Request another certificate
+                        a(href=(baseurl + '/request')) Request another certificate
 
                     h2 Certificate key
                     #key.cert(onclick="selectText('key')")
@@ -48,7 +48,7 @@ html(lang="en")
             else
                 p.subtitle Create a new certificate and certificate key
 
-                form(action="" method="post")
+                form(action=(baseurl + '/request') method="post")
                     table(style="width:100%;" border="0")
                         tr(style="text-align:left;height:50px;")
                             th(style="min-width: 350px;") Attribute

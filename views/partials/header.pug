@@ -4,21 +4,21 @@
     #header-menu
         ul
             li
-                a(href="/") Home
+                a(href=(baseurl + '/')) Home
             li
-                a(href="/cacerts") CA Certs
+                a(href=(baseurl + '/cacerts')) CA Certs
 
             if auth && auth.authed === true
                 li
-                    a(href="/request") Request certificate
+                    a(href=(baseurl + '/request')) Request certificate
                 li
-                    a(href="/list") Issued certificates
+                    a(href=(baseurl + '/list')) Issued certificates
                 li
-                    a(href="/revoke") Revoke certificate
+                    a(href=(baseurl + '/revoke')) Revoke certificate
     #header-login
         if auth && auth.authed === true
             | Logged in as #{auth.username}.&nbsp;
-            a(href="/logout") Log out.
+            a(href=(baseurl + '/logout')) Log out.
         else
             span Not logged in.
-            a(href="/") Log in.
+            a(href=(baseurl + '/')) Log in.

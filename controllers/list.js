@@ -12,6 +12,7 @@ module.exports = function(req, res) {
         title: 'List of issued certificates',
         content: {},
         auth: req.session.auth,
+        baseurl: global.config.server.baseurl,
         javascripts: [
             '/static/js/tablesort/tablesort.js',
             '/static/js/tablesort/sorts/tablesort.date.js'
@@ -52,7 +53,7 @@ module.exports = function(req, res) {
                             expirationtime: expirationtime,
                             revocationtime: revocationtime,
                             subject: cert.subject,
-                            download: '/getcert/?serial=' + cert.serial
+                            download: global.config.server.baseurl + '/getcert/?serial=' + cert.serial
                         }
                         page.content.certs.push(cert)
                     })

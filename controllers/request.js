@@ -16,7 +16,8 @@ module.exports = function(req, res) {
             content: {
                 state: 'form'
             },
-            auth: req.session.auth
+            auth: req.session.auth,
+            baseurl: global.config.server.baseurl
         }
 
         // Create temporary dir

@@ -14,13 +14,13 @@ html(lang="en")
                 if success
                     p.banner.success Certificate has been revoked successfully.
                     br/
-                    a(href="/revoke") Revoke another certificate
+                    a(href=(baseurl + '/revoke')) Revoke another certificate
                     | &nbsp; or &nbsp;
-                    a(href="/list") Show certificate overview
+                    a(href=(baseurl + '/list')) Show certificate overview
                 else
                     p.banner.fail #{errormessage}
             else
-                form(action="" method="GET")
+                form(action=(baseurl + '/revoke') method="GET")
                     input(type="text" name="serial" placeholder="Serial number, e.g. BEEF" style="margin-right: 30px;" maxlength=4)
                     input(type="submit" value="Revoke" style="max-width: 100px;")
 

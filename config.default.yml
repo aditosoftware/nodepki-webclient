@@ -1,4 +1,8 @@
 server:
+    baseurl: http://localhost:5000
+    port: 5000
+
+apiserver:
     hostname: ca.adito.dev
     port: 8080
     tls: false

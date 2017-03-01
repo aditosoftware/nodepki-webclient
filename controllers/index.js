@@ -7,7 +7,8 @@ module.exports = function(req, res) {
             title: 'Home',
             content: {},
             auth: req.session.auth,
-            login: false
+            login: false,
+            baseurl: global.config.server.baseurl
         };
 
         new Promise(function(resolve, reject) {

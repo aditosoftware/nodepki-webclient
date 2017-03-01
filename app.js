@@ -57,8 +57,8 @@ app.use(session({ secret: 'comebskfjevskn4inc8h3k', cookie: { maxAge: 3600000 },
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use('/static', express.static('static'));
 
-server.listen(5000, function () {
-    console.log('Server listening at port %d', 5000);
+server.listen(global.config.server.port, function () {
+    console.log('Server listening at port %d', global.config.server.port);
 });
 
 

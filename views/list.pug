@@ -9,13 +9,13 @@ html(lang="en")
             h1 #{title}
 
             p
-                a.normal(href="/list?state=all") All
+                a.normal(href=(baseurl + '/list?state=all')) All
                 | &nbsp; &nbsp; &nbsp;
-                a.normal(href="/list?state=valid") Valid
+                a.normal(href=(baseurl + '/list?state=valid')) Valid
                 | &nbsp; &nbsp; &nbsp;
-                a.normal(href="/list?state=revoked") Revoked
+                a.normal(href=(baseurl + '/list?state=revoked')) Revoked
                 | &nbsp; &nbsp; &nbsp;
-                a.normal(href="/list?state=expired") Expired
+                a.normal(href=(baseurl + '/list?state=expired')) Expired
 
             p Click on the column headers to sort.
 

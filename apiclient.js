@@ -46,13 +46,13 @@ exports.request = function(path, method, pushdata) {
         var req;
 
         new Promise(function(resolve, reject) {
-            if(global.config.server.tls) {
+            if(global.config.apiserver.tls) {
                 rootcheck.checkCert().then(function(){
                     var rootcert = fs.readFileSync('data/root.cert.pem');
 
                     req = https.request({
-                        host: global.config.server.hostname,
-                        port: global.config.server.port,
+                        host: global.config.apiserver.hostname,
+                        port: global.config.apiserver.port,
                         path: path,
                         method: method,
                         headers: {
@@ -67,8 +67,8 @@ exports.request = function(path, method, pushdata) {
                 });
             } else {
                 req = http.request({
-                    host: global.config.server.hostname,
-                    port: global.config.server.port,
+                    host: global.config.apiserver.hostname,
+                    port: global.config.apiserver.port,
                     path: path,
                     method: method,
                     headers: {
