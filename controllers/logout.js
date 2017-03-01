@@ -4,5 +4,5 @@ module.exports = function(req, res) {
     if(sess.auth)
         sess.auth.authed = false;
 
-    res.redirect(302, '/');
+    res.redirect(302, global.baseurl + '/');
 };
