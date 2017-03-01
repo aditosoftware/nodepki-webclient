@@ -16,19 +16,30 @@ html(lang="en")
                         a(href="/request") Request another certificate
 
                     h2 Certificate key
-
-                    pre
+                    #key.cert(onclick="selectText('key')")
                         | #{content.key}
 
                     h2 Certificate
-
-                    pre
+                    #cert.cert(onclick="selectText('cert')")
                         | #{content.cert}
 
                     h2 Intermediate Certificate
-
-                    pre
+                    #intermediate.cert(onclick="selectText('intermediate')")
                         | #{content.intermediatecert}
+
+
+                    script.
+                        function selectText(containerid) {
+                            if (document.selection) {
+                                var range = document.body.createTextRange();
+                                range.moveToElementText(document.getElementById(containerid));
+                                range.select();
+                            } else if (window.getSelection) {
+                                var range = document.createRange();
+                                range.selectNode(document.getElementById(containerid));
+                                window.getSelection().addRange(range);
+                            }
+                        }
 
                 else
                     p.banner.fail
