@@ -13,6 +13,7 @@ html(lang="en")
                     p.banner.fail #{errormessage}
 
             if (auth && auth.authed)
+                h1 Welcome to NodePKI-Webclient
                 p
                     | With NodePKI-Webclient you can:
                     ul
@@ -20,6 +21,9 @@ html(lang="en")
                         li Create new certificates
                         li List issued certificates
                         li Download issued certificates
+                        li Revoke certificates
+
+                p Please select an action from the top menu.
             else
                 if reqlogin
                     p.banner.fail You have to log in to continue

@@ -13,6 +13,8 @@
                     a(href="/request") Request certificate
                 li
                     a(href="/list") Issued certificates
+                li
+                    a(href="/revoke") Revoke certificate
     #header-login
         if auth && auth.authed === true
             | Logged in as #{auth.username}.&nbsp;

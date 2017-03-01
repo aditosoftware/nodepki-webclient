@@ -165,6 +165,34 @@ p.banner.success {
 }
 
 
+/*
+ * Table style
+ */
+#content table tr td, #content table tr th {
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+#content table tr td:first-child, #content table tr th:first-child {
+    padding-left: 0px;
+}
+#content table tr td:last-child, #content table tr th:last-child {
+    padding-right: 0px;
+}
+
+#content table tr th:hover {
+    cursor: pointer;
+}
+
+
+#content div.cert {
+    white-space: pre;
+    font-family: "monospace";
+    font-size: 12px;
+    line-height: 120%;
+}
+
+
 #footer {
     color: white;
     background-color: #1a1a1a;

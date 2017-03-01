@@ -19,7 +19,8 @@ var controller = {
     cacerts: require('./controllers/cacerts.js'),
     request: require('./controllers/request.js'),
     list: require('./controllers/list.js'),
-    getcert: require('./controllers/getcert.js')
+    getcert: require('./controllers/getcert.js'),
+    revoke: require('./controllers/revoke.js')
 }
 
 
@@ -64,8 +65,6 @@ server.listen(5000, function () {
 app.get('/', function(req, res) {
     controller.index(req, res);
 });
-
-
 app.post('/', function(req, res) {
     controller.index(req, res);
 });
@@ -74,7 +73,6 @@ app.post('/', function(req, res) {
 app.get('/logout', function(req, res) {
     controller.logout(req, res)
 });
-
 
 
 app.get('/cacerts', function(req, res) {
@@ -106,9 +104,26 @@ app.get('/list', function(req, res) {
     }
 });
 
+
 app.get('/getcert', function(req, res) {
     if(req.session.auth && req.session.auth.authed) {
         controller.getcert(req, res);
+    } else {
+        res.redirect(302, '/?reqlogin=1');
+    }
+});
+
+
+app.get('/revoke', function(req, res) {
+    if(req.session.auth && req.session.auth.authed) {
+        controller.revoke(req, res);
+    } else {
+        res.redirect(302, '/?reqlogin=1');
+    }
+});
+app.post('/revoke', function(req, res) {
+    if(req.session.auth && req.session.auth.authed) {
+        controller.revoke(req, res);
     } else {
         res.redirect(302, '/?reqlogin=1');
     }
