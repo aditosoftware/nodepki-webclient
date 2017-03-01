@@ -13,7 +13,7 @@ body pre {
 #header {
     height: 50px;
     width: 100%;
-    background-color: #023c53;
+    background-color: #1a1a1a;
     color: white;
     box-sizing: border-box;
     display: flex;
@@ -197,7 +197,7 @@ p.banner.success {
 
 #footer {
     color: white;
-    background-color: #023c53;
+    background-color: #1a1a1a;
     padding: 5px;
     text-align: center;
     font-size: 12px;
