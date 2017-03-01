@@ -16,10 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ThomasLeister/nodepki.git"
+    "url": "https://github.com/aditosoftware/nodepki-webclient.git"
   },
   "bugs": {
-    "url": "https://github.com/ThomasLeister/nodepki/issues"
+    "url": "https://github.com/aditosoftware/nodepki-webclient/issues"
   },
   "dependencies": {
     "express": "4.x",
@@ -29,6 +29,6 @@
     "uuid": "3.0.x",
     "js-yaml": "3.x"
   },
-  "homepage": "https://github.com/ThomasLeister/nodepki#readme",
+  "homepage": "https://github.com/aditosoftware/nodepki-webclient#readme",
   "devDependencies": {}
 }
