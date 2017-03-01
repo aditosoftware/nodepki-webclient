@@ -12,10 +12,10 @@ module.exports = function(req, res) {
         title: 'List of issued certificates',
         content: {},
         auth: req.session.auth,
-        baseurl: global.config.server.baseurl,
+        baseurl: global.baseurl,
         javascripts: [
-            '/static/js/tablesort/tablesort.js',
-            '/static/js/tablesort/sorts/tablesort.date.js'
+            global.baseurl + '/static/js/tablesort/tablesort.js',
+            global.baseurl + '/static/js/tablesort/sorts/tablesort.date.js'
         ]
     }
 

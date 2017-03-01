@@ -2,7 +2,7 @@ head
     title #{title}
 
     meta(charset="utf-8")
-    link(rel="stylesheet" href="/static/style.css")
+    link(rel="stylesheet" href=(baseurl + '/static/style.css'))
 
     if javascripts
         for script in javascripts

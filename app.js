@@ -49,6 +49,8 @@ if(fs.existsSync('data/config/config.yml')) {
     process.exit();
 }
 
+global.baseurl = global.config.server.baseurl
+
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'pug')
@@ -84,14 +86,14 @@ app.get('/request', function(req, res) {
     if(req.session.auth && req.session.auth.authed) {
         controller.request(req, res);
     } else {
-        res.redirect(302, '/?reqlogin=1');
+        res.redirect(302, global.baseurl + '/?reqlogin=1');
     }
 });
 app.post('/request', function(req, res) {
     if(req.session.auth && req.session.auth.authed) {
         controller.request(req, res);
     } else {
-        res.redirect(302, '/?reqlogin=1');
+        res.redirect(302, global.baseurl + '/?reqlogin=1');
     }
 });
 
@@ -100,7 +102,7 @@ app.get('/list', function(req, res) {
     if(req.session.auth && req.session.auth.authed) {
         controller.list(req, res);
     } else {
-        res.redirect(302, '/?reqlogin=1');
+        res.redirect(302, global.baseurl + '/?reqlogin=1');
     }
 });
 
@@ -109,7 +111,7 @@ app.get('/getcert', function(req, res) {
     if(req.session.auth && req.session.auth.authed) {
         controller.getcert(req, res);
     } else {
-        res.redirect(302, '/?reqlogin=1');
+        res.redirect(302, global.baseurl + '/?reqlogin=1');
     }
 });
 
@@ -118,13 +120,13 @@ app.get('/revoke', function(req, res) {
     if(req.session.auth && req.session.auth.authed) {
         controller.revoke(req, res);
     } else {
-        res.redirect(302, '/?reqlogin=1');
+        res.redirect(302, global.baseurl + '/?reqlogin=1');
     }
 });
 app.post('/revoke', function(req, res) {
     if(req.session.auth && req.session.auth.authed) {
         controller.revoke(req, res);
     } else {
-        res.redirect(302, '/?reqlogin=1');
+        res.redirect(302, global.baseurl + '/?reqlogin=1');
     }
 });
