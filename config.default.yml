@@ -6,6 +6,7 @@ server:
 apiserver:
     hostname: ca.adito.dev
     port: 8080
+    publicport: 8080
     tls: false
 
 csr_defaults:

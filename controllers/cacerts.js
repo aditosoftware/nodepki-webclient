@@ -38,7 +38,7 @@ module.exports = function(req, res) {
             });
         })
         .then(function(page) {
-            var publicpath = (global.config.apiserver.tls ? 'https://' : 'http://') + global.config.apiserver.hostname + ':' + global.config.apiserver.port + '/public/'
+            var publicpath = (global.config.apiserver.tls ? 'https://' : 'http://') + global.config.apiserver.hostname + ':' + global.config.apiserver.publicport + '/public/'
             page.rootdownload = publicpath + 'root.cert.pem'
             page.intermediatedownload = publicpath + 'intermediate.cert.pem'
 
