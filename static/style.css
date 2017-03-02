@@ -22,8 +22,16 @@ body pre {
 }
 
 #header a {
-    text-decoration: underline;
+    text-decoration: none;
     color: inherit;
+}
+
+#header-menu a::before {
+    content: '▶ ';
+}
+
+#header-login a {
+    text-decoration: underline;
 }
 
     #header-title {
