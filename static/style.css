@@ -216,6 +216,26 @@ p.banner.warn {
 
 
 
+#content div.readmecontainer {
+    margin-top: 100px;
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: #f6f6f6;
+    border: solid 1px #f0f0f0;
+}
+
+
+#content div.readmecontainer pre {
+    margin-left: 50px;
+    padding-left: 20px;
+    border-left: solid 2px #009cff;
+    line-height: 130%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
 #footer {
     color: white;
     background-color: #1a1a1a;

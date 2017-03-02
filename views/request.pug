@@ -123,6 +123,53 @@ html(lang="en")
                                 input(type="hidden" name="submitted" value="submitted_csr")
                                 input(type="submit" value="Request certificate")
 
+                .readmecontainer
+                    h2 How to create a CSR
+
+                    p
+                        | ▶ Make sure you have openssl installed on your system.
+
+                    p
+                        | ▶ Create a certificate key:
+                    pre
+                        | openssl genrsa -aes256 -out key.pem 2048
+                    p
+                        | ▶ Create an openssl.cnf configuration file with the following content:
+                    pre
+                        | [ req ]
+                        | default_bits        = 2048
+                        | distinguished_name  = req_distinguished_name
+                        | string_mask         = utf8only
+                        |
+                        | # SHA-1 is deprecated, so use SHA-2 instead.
+                        | default_md          = sha256
+                        |
+                        |
+                        | [ req_distinguished_name ]
+                        | countryName                     = Country Name (2 letter code)
+                        | stateOrProvinceName             = State or Province Name
+                        | localityName                    = Locality Name
+                        | 0.organizationName              = Organization Name
+                        | organizationalUnitName          = Organizational Unit Name
+                        | commonName                      = Common Name
+                        | emailAddress                    = Email Address
+                        |
+                        | # Optionally, specify some defaults.
+                        | countryName_default             = DE
+                        | stateOrProvinceName_default     = Bavaria
+                        | localityName_default            = Geisenhausen
+                        | 0.organizationName_default      = ADITO Software GmbH
+
+                    p
+                        | ▶ Create a certificate signing request (CSR):
+
+                    pre
+                        | openssl req -config openssl.cnf -key key.pem -new -sha256 -out csr.pem
+
+                    p
+                        | ▶ csr.pem contains your CSR.
+
+
 
 
 
