@@ -79,9 +79,10 @@ body pre {
     color: black;
     padding: 15px;
     box-sizing: border-box;
-    min-height: calc(100vh - 70px - 10px);
+    min-height: calc(100vh - 70px - 10px - 100px);
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 100px;
     max-width: 1000px;
 }
 
@@ -137,6 +138,11 @@ p.banner.success {
     background-color: #c5ffb3;
 }
 
+p.banner.warn {
+    border-left: solid 10px #f5d003;
+    background-color: #ffeeb3;
+}
+
 
 
 /*
@@ -187,12 +193,19 @@ p.banner.success {
 }
 
 
+#content table.request tr td {
+    width: 60%;
+}
+
+
+
 #content div.cert {
     white-space: pre;
     font-family: "monospace";
     font-size: 12px;
     line-height: 120%;
 }
+
 
 
 #footer {

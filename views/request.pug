@@ -15,9 +15,16 @@ html(lang="en")
                     p
                         a(href=(baseurl + '/request')) Request another certificate
 
-                    h2 Certificate key
-                    #key.cert(onclick="selectText('key')")
-                        | #{content.key}
+                    if content.key && content.key !== ''
+                        h2 Certificate key
+
+                        p.banner.warn
+                            | Save your certificate key NOW!
+                            br/
+                            | The certificate key is not stored on the server and therefore cannot be retrieved again!
+
+                        #key.cert(onclick="selectText('key')")
+                            | #{content.key}
 
                     h2 Certificate
                     #cert.cert(onclick="selectText('cert')")
@@ -46,10 +53,10 @@ html(lang="en")
                         | #{errormessage}
 
             else
-                p.subtitle Create a new certificate and certificate key
+                h3 Create a new certificate and certificate key
 
                 form(action=(baseurl + '/request') method="post")
-                    table(style="width:100%;" border="0")
+                    table.request(style="width:100%;" border="0")
                         tr(style="text-align:left;height:50px;")
                             th(style="min-width: 350px;") Attribute
                             th Value
@@ -91,9 +98,32 @@ html(lang="en")
 
                         tr
                             td
-                                input(type="hidden" name="submitted" value="submitted")
+                                input(type="hidden" name="submitted" value="submitted_easyform")
                             td
                                 input(type="submit" value="Request certificate")
+
+
+                h3 ... or submit a CSR in .pem format
+
+                form(action=(baseurl + '/request') method="post")
+                    table.request(style="width:100%;" border="0")
+                        tr(style="text-align:left;height:50px;")
+                            td
+                                | CSR in PEM format
+                            td
+                                textarea(name="csr" style="max-width:300px; width: 100%; height:200px; box-sizing:border-box; padding: 10px;")
+                        tr
+                            td
+                                | Certificate lifetime (in days)
+                            td
+                                input(type="number" name="certificate_lifetime" value="365")
+                        tr
+                            td
+                            td
+                                input(type="hidden" name="submitted" value="submitted_csr")
+                                input(type="submit" value="Request certificate")
+
+
 
 
 
