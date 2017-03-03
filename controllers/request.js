@@ -48,7 +48,9 @@ module.exports = function(req, res) {
                                     locality: req.body.certificate_locality,
                                     organization: req.body.certificate_organization,
                                     cname: req.body.certificate_cname,
-                                    lifetime: parseInt(req.body.certificate_lifetime)
+                                    san: req.body.certificate_san,
+                                    lifetime: parseInt(req.body.certificate_lifetime),
+                                    type: req.body.certificate_type
                                 }
                             }
                         } catch(err) {
@@ -68,9 +70,33 @@ module.exports = function(req, res) {
                                 // Save the key in variable
                                 page.content.key = fs.readFileSync(tempdir + 'key.pem')
 
+                                // Is request for a client certificate or for a server certificate?
+                                var opensslconf;
+                                if(requestdata.certificate.type === 'client') {
+                                    opensslconf = './../../openssl_client.cnf'
+                                } else if(requestdata.certificate.type === 'server'){
+                                    var template = fs.readFileSync('openssl_server.cnf', 'utf8')
+                                    var conf = template + 'DNS.1 = ' + requestdata.certificate.cname + '\n'
+
+                                    if(requestdata.certificate.san !== '') {
+                                        // Loop through all altnames
+                                        var altnames = requestdata.certificate.san.split('\n')
+                                        altnames.forEach(function(altname, index, array) {
+                                            conf += 'DNS.' + (index + 2) + ' = ' + altname + '\n'
+                                        })
+                                    }
+
+                                    // Write new conf to file
+                                    console.log(conf)
+
+                                    fs.writeFileSync(tempdir + 'openssl.cnf', conf)
+                                    opensslconf = 'openssl.cnf'
+                                }
+
+
                                 // Create csr.
                                 passparam = (requestdata.key.passphrase === '') ? '' : '-passin pass:' + requestdata.key.passphrase;
-                                exec('openssl req -config ../../openssl.cnf -key key.pem -new -sha256 -out cert.csr ' + passparam + ' -subj "/C='+requestdata.certificate.country+'/ST='+requestdata.certificate.state+'/L='+requestdata.certificate.locality+'/O='+requestdata.certificate.organization+'/CN='+requestdata.certificate.cname+'"', {
+                                exec('openssl req -config ' + opensslconf + ' -key key.pem -new -sha256 -out cert.csr ' + passparam + ' -subj "/C='+requestdata.certificate.country+'/ST='+requestdata.certificate.state+'/L='+requestdata.certificate.locality+'/O='+requestdata.certificate.organization+'/CN='+requestdata.certificate.cname+'"', {
                                     cwd: tempdir
                                 }, function(error, stdout, stderr) {
                                     if(!error) {
@@ -107,7 +133,7 @@ module.exports = function(req, res) {
                 })
                 .then(function(csr) {
                     fs.removeSync(tempdir);
-                    
+
                     // Send CSR to NodePKI server
                     // [ ... ]
                     var pushdata = {
