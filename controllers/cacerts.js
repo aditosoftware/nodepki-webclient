@@ -39,8 +39,8 @@ module.exports = function(req, res) {
         })
         .then(function(page) {
             var publicpath = (global.config.apiserver.tls ? 'https://' : 'http://') + global.config.apiserver.hostname + ':' + global.config.apiserver.publicport + '/public/'
-            page.rootdownload = publicpath + 'root.cert.pem'
-            page.intermediatedownload = publicpath + 'intermediate.cert.pem'
+            page.rootdownload = publicpath + 'ca/root/cert'
+            page.intermediatedownload = publicpath + 'ca/intermediate/cert'
 
             page.success = true
             res.render('cacerts', page)
