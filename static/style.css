@@ -235,6 +235,11 @@ p.banner.warn {
 }
 
 
+#listtable tr:hover {
+    color: blue;
+}
+
+
 
 #footer {
     color: white;
