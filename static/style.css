@@ -241,6 +241,17 @@ p.banner.warn {
 
 
 
+textarea.requestform {
+    max-width:300px;
+    width: 100%;
+    height:100px;
+    box-sizing:border-box;
+    padding: 10px;
+    border: solid 1px #dadada
+}
+
+
+
 #footer {
     color: white;
     background-color: #1a1a1a;
