@@ -209,7 +209,7 @@ p.banner.warn {
 
 #content div.cert {
     white-space: pre;
-    font-family: "monospace";
+    font-family: "Consolas", "monaco", "monospace";
     font-size: 12px;
     line-height: 120%;
 }
