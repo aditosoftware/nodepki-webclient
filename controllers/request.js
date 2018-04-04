@@ -140,7 +140,7 @@ module.exports = function(req, res) {
                         data: {
                             csr: csr,
                             lifetime: requestdata.certificate.lifetime,
-                            type: 'server'
+                            type: requestdata.certificate.type
                         },
                         auth: {
                             username: req.session.auth.username,
