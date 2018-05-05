@@ -1,16 +1,22 @@
 server:
-    baseurl: http://localhost:5000
+    # E.g.: http://localhost:5000
+    baseurl: CA_WEBCLIENT_HTTP_URL
     ip: 0.0.0.0
     port: 5000
 
 apiserver:
-    hostname: ca.adito.dev
+    # E.g.: ca.adito.dev
+    hostname: CA_API_SERVER_URL
     port: 8080
     publicport: 8080
     tls: false
 
 csr_defaults:
-    country: DE
-    state: Bavaria
-    locality: Geisenhausen
-    organization: ADITO Software GmbH
+    # E.g.: DE
+    country: COUNTRY_CODE
+    # E.g.: Bavaria
+    state: STATE_NAME
+    # E.g.: Geisenhausen
+    locality: LOCALITY_NAME
+    # E.g.: ADITO Software GmbH
+    organization: ORGANIZATION_NAME
