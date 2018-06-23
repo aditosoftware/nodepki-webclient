@@ -45,9 +45,18 @@ module.exports = function(req, res) {
                     page.content.certs = []
 
                     response.certs.forEach(function(cert) {
-                        var expirationtime = '20' + (cert.expirationtime.slice(0,2)) + '-' + (cert.expirationtime.slice(2,4)) + '-' + (cert.expirationtime.slice(4,6))
-                        var revocationtime = (cert.revocationtime !== '') ? '20' + (cert.revocationtime.slice(0,2)) + '-' + (cert.revocationtime.slice(2,4)) + '-' + (cert.revocationtime.slice(4,6)) : ''
-
+			var expirationtime = '';
+			var revocationtime = '';
+			if( cert.expirationtime.length == 13 ) {
+                        	expirationtime = '20' + (cert.expirationtime.slice(0,2)) + '-' + (cert.expirationtime.slice(2,4)) + '-' + (cert.expirationtime.slice(4,6))
+                        } else {
+                        	expirationtime = '' + (cert.expirationtime.slice(0,4)) + '-' + (cert.expirationtime.slice(4,6)) + '-' + (cert.expirationtime.slice(6,8))
+			}
+			if( cert.revocationtime.length == 13 ) {
+				revocationtime = '' + (cert.revocationtime !== '') ? '20' + (cert.revocationtime.slice(0,2)) + '-' + (cert.revocationtime.slice(2,4)) + '-' + (cert.revocationtime.slice(4,6)) : ''
+			} else {
+				revocationtime = (cert.revocationtime !== '') ? '' + (cert.revocationtime.slice(0,4)) + '-' + (cert.revocationtime.slice(4,6)) + '-' + (cert.revocationtime.slice(6,8)) : ''
+			}
                         var cert = {
                             serial: cert.serial,
                             expirationtime: expirationtime,
